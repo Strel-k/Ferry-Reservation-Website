@@ -167,13 +167,18 @@
         font-weight:400;
         text-transform: capitalize;
         border:none;
+        transition:all .42s ease;
+
     }
     .discover-btn i {
         vertical-align: middle;
 
     }
     .discover-btn:hover {
+
         background-color: #5d85a7;
+        transition:all .42s ease;
+
 
     }
     .reviews {
