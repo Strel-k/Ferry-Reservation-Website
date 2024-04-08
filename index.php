@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
-
+    <link rel="icon" href="img/ferrylogo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -13,11 +13,11 @@
   href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-3.7.1.min.js"></script>
-    <title>MathiFerry</title>
+    <title>Home | Binangkas</title>
 </head>
 <body>
     <header>
-        <a href="#" class="logo"> <img src="img/ferrylogo.png" alt=""><span class="logo-container">Barko Ni Dave</span></a>
+        <a href="#" class="logo"> <img src="img/ferrylogo.png" alt=""><span class="logo-container">Binangkas</span></a>
         <ul class="navmenu">
             <li><a href="">Booking</a></li>
             <li><a href="">Article/Blog</a></li>
@@ -29,12 +29,13 @@
             <a href="#"></a>
             <a href="#"></a>
         </div>
+        
     </header>
     <section class="main-home">
         <div class="main-text">
-            <h5>lorem ipsum macabale divina</h5>
-            <h4>nemesio milagroso</h4>
-            <p>mga maiitim na lalaki ang nais.</p>
+            <h5>Binangkas</h5>
+            <h4>Experience the Beauty of the Philippines</h4>
+            <p>Enjoy the Luxury of our Ships</p>
         </div>
         <div class="down-arrow">
             <a href="#destinations" class="down"><i class='bx bx-down-arrow-alt' ></i></a>
@@ -80,7 +81,7 @@
             <div class="row">
                 <img src="img/chocolate-hills.jpg" alt="" style="height:100%;">
                 <div class="location-texts">
-                    <h5>HOT!</h5>
+                    <h5>CONTROVERSIAL!</h5>
                 </div>
                 <div class="destination-description">
                     <h4>chocolate Hills</h4>
@@ -97,16 +98,7 @@
                 </div>
                 
             </div>
-            <div class="row">
-                <img src="img/palawan.jpg" alt="" style="height:100%;">
-                <div class="location-texts">
-                    <h5>HOT!</h5>
-                </div>
-                <div class="destination-description">
-                    <h4>Palawan</h4>
-                </div>
-                
-            </div>
+          
         </div>
         <div class="discover">
             <button class="discover-btn">DISCOVER <i class='bx bx-right-arrow-alt' ></i></button>
@@ -150,7 +142,7 @@
             <img src="img/ferrylogo.png" alt="">
         </div>
         <div class="logo-title">
-                <h4>Barko ni Dave</h4>
+                <h4>Binangkas</h4>
             </div>
             <ul class="social-icons">
                 <li><a href="#"><i class='bx bxl-instagram-alt'></i></a></li>
