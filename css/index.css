@@ -36,7 +36,7 @@ header {
 .logo-container {
     top: 0px;
     position: relative;
-    color: blue;
+    color: #4A8FCD;
     font-size: 22px;
     font-weight: 400;
     text-transform: uppercase;
@@ -44,7 +44,7 @@ header {
 }
 
 .navmenu a {
-    color: blue;
+    color: #4A8FCD;
     font-size: 16px;
     text-transform: uppercase;
     padding: 20px 50px;
@@ -84,7 +84,7 @@ section {
 }
 
 .main-text h4 {
-    color: blue;
+    color: white;
     font-size: 30px;
     text-align: center;
     font-weight: 400;
@@ -170,12 +170,12 @@ header.sticky {
 
 .center-text h1 {
     font-weight: 300;
-    color: blue;
+    color: #4A8FCD;
 }
 
 .destination-description h4 {
-    color: blue;
-    font-size: 14px; /* Adjusted font size for responsiveness */
+    color: #4A8FCD;
+    font-size: 14px; 
     text-transform: uppercase;
     font-weight: 400;
     position: absolute;

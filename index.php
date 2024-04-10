@@ -1,3 +1,5 @@
+<?php include "script/database.php";?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
