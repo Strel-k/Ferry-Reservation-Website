@@ -18,21 +18,7 @@
     <title>Home | Binangkas</title>
 </head>
 <body>
-    <header>
-        <a href="#" class="logo"> <img src="img/ferrylogo.png" alt=""><span class="logo-container">Binangkas</span></a>
-        <ul class="navmenu">
-            <li><a href="">Booking</a></li>
-            <li><a href="">Article/Blog</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="">Contact Us</a></li>
-        </ul>
-        <div class="nav-icon">
-            <a href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
-        </div>
-        
-    </header>
+   <?php include "script/header.php";?>
     <section class="main-home">
         <div class="main-text">
             <h5>Binangkas</h5>
@@ -107,55 +93,34 @@
         </div>
     </section>
     <section class="reviews">
-
-    </section>
-    <section class="contact">
-        <div class="contact-info">
-            <div class="first-info">
-                <h1>Helpful Links</h1>
-                <p><a href="#">Terms and Conditions</a></p>
-                <p><a href="#">Company Policy</a></p>
-                <p><a href="#">Privacy Policy</a></p>
-                <p><a href="#">Refund Policy</a></p>
-                <p><a href="#">Rebooking</a></p>
+        <div class="news">
+            <div class="up-center-text">
+                <h2>Articles</h2>
             </div>
-            <div class="second-info">
-                <h1>Business Hours</h1>
-                <p>Monday to Friday</p>
-                <p>8AM-5PM</p>
-                <p>Saturday</p>
-                <p>8AM-12NN</p>
-                <p></p>
+            <div class="news-content">
+                <div class="content">
+                <img src="img/bl-1.png" alt="">
+                <h3>Summer Sale Returns!</h3>
+                <p>The Prices of Boat Ferrying goes down in anticipation of...</p>
+               <a href=""> <h6>Continue...</h6></a>
+                </div>
+                <div class="content">
+                <img src="img/bl-2.png" alt="">
+                <h3>Foreigners Commend Services!</h3>
+                <p>Visitors from other countries commend Binangkas...</p>
+               <a href=""> <h6>Continue...</h6></a>
+                </div>
+                <div class="content">
+                <img src="img/chocolate-hills.jpg" alt="">
+                <h3>Chocolate Hills.jpeg</h3>
+                <p>Ba't ba kasi nagtayo ng resort sa Chocolate Hills? Madami na ngang resort sa Pinas eh.</p>
+                <a href=""><h6>Continue...</h6></a>
+                </div>
+                
             </div>
-            <div class="third-info">
-                <h1>Quick Links</h1>
-                <p><a href="#">Home</a></p>
-                <p><a href="#">About Us</a></p>
-                <p><a href="#">Routes</a></p>
-                <p><a href="#">Schedules</a></p>
-                <p><a href="#">FAQs</a></p>
-            </div>
-            
         </div>
-        
     </section>
-    <section class="footer">
-        <div class="logo-center">
-            <img src="img/ferrylogo.png" alt="">
-        </div>
-        <div class="logo-title">
-                <h4>Binangkas</h4>
-            </div>
-            <ul class="social-icons">
-                <li><a href="#"><i class='bx bxl-instagram-alt'></i></a></li>
-                <li><a href="#"><i class='bx bxl-facebook-circle' ></i></a></li>
-                <li><a href="#"><i class='bx bxl-twitter' ></i></a></li>
-            </ul>
-    </section>
-    <div class="end-text">
-    <p>Copyright © 2024. All Rights Reserved. Powered by div.</div></p>
-
-    </div>
+   <?php include "script/footer.php";?>
     <script src="js/header.js"></script>
 </body>
 </html>

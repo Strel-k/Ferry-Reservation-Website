@@ -360,14 +360,48 @@ header.sticky {
     color: #fff;
     transition: all .42s ease;
 }
+.up-center-text h2 {
+    text-transform: uppercase;
+    font-weight:400;
+    text-align: center;
+}
+.news-content {
+        display:grid;
+        grid-template-columns: repeat(auto-fit, minmax(380px, auto));
+        gap:1rem;
+    
+}
 
+content h4 {
+    color:#111;
+    font-size:18px;
+    font-weight:600;
+}
+.content p {
+    color:#707070;
+    font-size:15px;
+    max-width:380px;
+    line-height:25px;
+    margin-bottom:12px;
+}
+.content h6 {
+    color:#151515;
+    font-size:14px;
+    font-weight:500; 
+}
+.content img {
+    width:380px;
+    height:auto;
+    border-radius:5px;
+}
 
 @media screen and (max-width: 768px) {
     header {
         padding: 5px 3%;
     }
     .logo-container {
-        padding:1px 2px;
+        padding:0px 2px;
+        font-size:18px;
     }
     .navmenu a {
         padding: 20px 10px;
