@@ -33,7 +33,7 @@
         </div>
         <div class="about-content">
             <div class="content">
-                <img src="img/mathigok-corp.jpg" alt="" style="border-radius:15px;">
+                <img src="img/mathigok-corp.jpg" alt="" style="border-radius:85px;">
                 <div class="about-text">
             <h4>Founded by the Mathigok Corporation in 2014.</h4>
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor urna vel velit vestibulum, sit amet porttitor ipsum mattis. Integer at ligula vitae sem fringilla tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </span>    
