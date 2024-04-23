@@ -1,97 +1,160 @@
-let currentPassenger = 1; // Variable to track the current passenger being entered
-let paymentCompleted = false; // Flag to track whether payment is completed
+document.addEventListener("DOMContentLoaded", function() {
+    let currentPassenger = 1; // Variable to track the current passenger being entered
+    let passengerID; // Define passengerID variable
+    let paymentCompleted = false; // Flag to track whether payment is completed
+    let email; // Variable to store the email address
 
-document.getElementById("booking-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent form submission
+    document.getElementById("booking-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const cruiseID = document.getElementById("departing-ship").value;
+        const returnCruise = document.getElementById("returning-ship").value;
+        const passengerCount = parseInt(document.getElementById("passenger-count").value);
+        const cabinType = document.getElementById("cabin").value;
+        email = document.getElementById("email_1").value; // Store the email address
+        document.getElementById("input-body").style.display = "none";
+        showPassengerPopup(passengerCount, cruiseID, returnCruise, cabinType, email); // Pass the email to showPassengerPopup
+    });
 
-    // Get form data
-    const origin = document.getElementById("origin").value;
-    const destination = document.getElementById("destination").value;
-    const date = document.getElementById("date").value;
-    const passengerCount = parseInt(document.getElementById("passenger-count").value);
+    function showPassengerPopup(passengerCount, cruiseID, returnCruise, cabinType, email) {
+        if (currentPassenger <= passengerCount) {
+            const popup = document.createElement("div");
+            popup.classList.add("popup");
+            popup.innerHTML = `
+                <h3>Passenger ${currentPassenger}</h3>
+                <input type="text" id="name_${currentPassenger}" placeholder="Name">
+                <input type="text" id="email_${currentPassenger}" placeholder="Email" value="${email}"> <!-- Set the email value -->
+                <input type="date" id="dob_${currentPassenger}" placeholder="Date of Birth">
+                <select id="gender_${currentPassenger}" name="gender_${currentPassenger}">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="tel" id="phoneNumber_${currentPassenger}" placeholder="Phone Number">
+                <button class="submit-passenger-btn">Submit Passenger ${currentPassenger}</button>
+            `;
+            document.body.appendChild(popup);
 
-    // Hide the original form
-    document.getElementById("input-body").style.display = "none";
+            popup.addEventListener("click", function(event) {
+                if (event.target.classList.contains("submit-passenger-btn")) {
+                    const name = document.getElementById("name_" + currentPassenger).value;
+                    const email = document.getElementById("email_" + currentPassenger).value;
+                    const dob = document.getElementById("dob_" + currentPassenger).value;
+                    const gender = document.getElementById("gender_" + currentPassenger).value;
+                    const phoneNumber = document.getElementById("phoneNumber_" + currentPassenger).value;
 
-    showPassengerPopup(passengerCount);
-});
+                    console.log("Name:", name);
+                    console.log("Email:", email);
+                    console.log("DOB:", dob);
+                    console.log("Gender:", gender);
+                    console.log("Phone Number:", phoneNumber);
 
-function showPassengerPopup(passengerCount) {
-    if (currentPassenger <= passengerCount) {
+                    if (name === '' || email === '' || dob === '' || phoneNumber === '') {
+                        alert("One or more required fields are missing: name, email, dob, phoneNumber");
+                        return;
+                    }
+
+                    const departureDate = document.getElementById("departure-date").value;
+                    const returnDate = document.getElementById("return-date").value;
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("POST", "../script/insert-data.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            console.log(xhr.responseText);
+                            passengerID = xhr.responseText;
+                            popup.remove();
+                            currentPassenger++;
+                            if (currentPassenger > passengerCount) {
+                                showPaymentPopup(cruiseID, returnCruise);
+                            } else {
+                                showPassengerPopup(passengerCount, cruiseID, returnCruise, cabinType, email);
+                            }
+                        }
+                    };
+
+                    const formData = `name=${name}&email=${email}&dob=${dob}&gender=${gender}&phoneNumber=${phoneNumber}&origin=${origin}&destination=${destination}&departure-date=${departureDate}&return-date=${returnDate}&passenger-count=${passengerCount}&cabinType=${cabinType}&cruiseID=${cruiseID}&returnCruise=${returnCruise}`;
+                    xhr.send(formData);
+                }
+            });
+        }
+    }
+
+    function showPaymentPopup(cruiseID, returnCruise) {
         const popup = document.createElement("div");
         popup.classList.add("popup");
         popup.innerHTML = `
-            <h3>Passenger ${currentPassenger}</h3>
-            <input type="text" placeholder="Name">
-            <input type="text" placeholder="Email">
-            <label for="trip-type">Departure Date</label>
-
-            <input type="date" id="date" name="DepartDate">
-            <label for="trip-type">Return Date</label>
-
-            <input type="date" id="date" name="ReturnDate">
-            <input type="text" placeholder="Phone Number">
-            <input type="text" placeholder="Address">
-            <input type="text" placeholder="Date of Birth">
-            <button class="submit-passenger-btn">Submit Passenger ${currentPassenger}</button>
+            <h3>Payment</h3>
+            <select id="paymentMethod" name="paymentMethod">
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+            </select>
+            <input type="text" id="username" placeholder="Username">
+            <input type="text" id="cardNumber" placeholder="Card Number">
+            <input type="text" id="expirationDate" placeholder="Expiration Date">
+            <h4>Total: P100.25</h4>
+            <button class="submit-payment-btn">Make Payment</button>
         `;
         document.body.appendChild(popup);
 
-        const submitPassengerButton = popup.querySelector(".submit-passenger-btn");
-        submitPassengerButton.addEventListener("click", function() {
-            const passengerInputs = popup.querySelectorAll("input");
-            const passengerData = Array.from(passengerInputs).map(input => input.value);
-            console.log("Passenger data:", passengerData);
-            popup.remove();
-            currentPassenger++;
-            if (currentPassenger > passengerCount) {
-                showPaymentPopup(); 
-            } else {
-                showPassengerPopup(passengerCount);
+        const submitPaymentButton = popup.querySelector(".submit-payment-btn");
+        submitPaymentButton.addEventListener("click", function() {
+            const paymentMethod = document.getElementById("paymentMethod").value;
+            const username = document.getElementById("username").value;
+            const cardNumber = document.getElementById("cardNumber").value;
+            const expirationDate = document.getElementById("expirationDate").value;
+
+            if (paymentMethod === '' || username === '' || cardNumber === '' || expirationDate === '') {
+                alert("One or more required fields are missing: paymentMethod, username, cardNumber, expirationDate");
+                return;
             }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "../script/insert-payment.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    paymentCompleted = true;
+                    popup.remove();
+                    showConfirmation(email); // Pass the email to showConfirmation
+                }
+            };
+            const formData = `paymentMethod=${paymentMethod}&username=${username}&cardNumber=${cardNumber}&expirationDate=${expirationDate}&passengerID=${passengerID}&cruiseID=${cruiseID}&returnCruise=${returnCruise}`;
+            xhr.send(formData);
         });
     }
-}
 
-function showPaymentPopup() {
-    const popup = document.createElement("div");
-    popup.classList.add("popup");
-    popup.innerHTML = `
-    <form id='paymentMethod'>
-        <h3>Payment</h3>
-        <select id="PaymentMethod" name="PaymentMethod">
-        <option value="Credit Cart">Credit Card</option>
-        <option value="Debit">Debit Card</option>
-        <option value="Bank Transfer">Bank Transfer</option>
-    </select>
-    <input type="text" placeholder="UserName">
-    <input type="text" placeholder="Card Number">
-    <input type="text" placeholder="Expiration Date">
-    <h4>Total: P100.25</h4>
-
-        <button class="submit-payment-btn">Make Payment</button>
-        </form>
-    `;
-    document.body.appendChild(popup);
-
-    const submitPaymentButton = popup.querySelector(".submit-payment-btn");
-    submitPaymentButton.addEventListener("click", function() {
-        console.log("Payment completed!");
-        popup.remove(); 
-        paymentCompleted = true;
-        showSuccessPopup(); 
-    });
-}
-
-function showSuccessPopup() {
-    const successPopup = document.createElement("div");
-    successPopup.classList.add("popup");
-    successPopup.innerHTML = `
-        <h3>Success!</h3>
-        <p style='text-align:center;'>Your booking has been successfully submitted.<br>Please Wait for an Email Confirmation.</p>
-    `;
-    document.body.appendChild(successPopup);
-    setTimeout(function() {
-        window.location.href = "index.php"; 
-    }, 3000); 
-}
+    function showConfirmation(email) {
+        console.log('Email:', email); 
+        if (!email) {
+            console.error('Email address is empty.');
+            return;
+        }
+    
+        // Display confirmation message
+        const confirmationMessage = document.createElement("div");
+        confirmationMessage.classList.add("popup");
+        confirmationMessage.innerHTML = `
+            <h3>Booking Confirmed!</h3>
+            <p style='text-align:center;'>Your booking is successful. Please await an email confirmation.</p>
+        `;
+        document.body.appendChild(confirmationMessage);
+        
+        // Send email confirmation
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "../script/confirm-email.php", true); 
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                } else {
+                    console.error('Failed to send email confirmation:', xhr.statusText);
+                }
+            }
+        };
+        xhr.send("email=" + encodeURIComponent(email)); // Pass the email address
+    }
+});
