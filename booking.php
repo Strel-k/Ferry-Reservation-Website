@@ -34,7 +34,7 @@
         
             <div class="input-body" id="input-body">
                 <div class="booking-form" id="booking-form">
-                    <form action="script/insert-data.php" id="booking-form"method="post">                  
+                <form action="script/insert-data.php" id="booking-form" method="post">
                         <div class="trip-title">
                             <label for="roundtrip">Trip Type</label>
                         </div>
