@@ -138,6 +138,153 @@ class Database {
             return "Error: " . $this->connection->error;
         }
     }
+    public function getPassengers() {
+        $passengers = [];
+        $sql = "SELECT * FROM passenger";
+        $result = $this->connection->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $passengers[] = $row;
+            }
+        }
+        return $passengers;
+    }
+    public function getPassengersPaginated($offset, $limit) {
+        $passengers = [];
+        $sql = "SELECT * FROM passenger LIMIT ?, ?";
+        $statement = $this->connection->prepare($sql);
+        $statement->bind_param("ii", $offset, $limit);
+        $statement->execute();
+        $result = $statement->get_result();
+        while ($row = $result->fetch_assoc()) {
+            $passengers[] = $row;
+        }
+        return $passengers;
+    }
+    public function getTotalPassengers() {
+        $sql = "SELECT COUNT(*) AS total FROM passenger";
+        $result = $this->connection->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['total'];
+    }
+    public function updatePassenger($passengerID, $name, $email, $dob, $phone, $gender) {
+        $stmt = $this->connection->prepare("UPDATE passenger SET name = ?, email = ?, DOB = ?, Phone_number = ?, gender = ? WHERE passengerID = ?");
+        
+        $stmt->bind_param("sssssi", $name, $email, $dob, $phone, $gender, $passengerID);
+        
+        $stmt->execute();
+    
+        
+        return $stmt->affected_rows;
+    }
+    public function deletePassenger($passengerID) {
+        $stmt = $this->connection->prepare("DELETE FROM passenger WHERE passengerID = ?");
+        $stmt->bind_param("i", $passengerID);
+        $stmt->execute();
+        
+        return $stmt->affected_rows; 
+    }
+    public function addCruise($cruiseName, $cruisePrice) {
+        $sql = "INSERT INTO cruise (CruiseName, Price) VALUES (?, ?)";
+        $stmt = $this->connection->prepare($sql);
+    
+        $stmt->bind_param("si", $cruiseName, $cruisePrice);
+        if ($stmt->execute()) {
+            return true; 
+        } else {
+            return "Error: " . $stmt->error;
+        }
+    }
+    public function deleteCruise($cruiseID) {
+        $stmt = $this->connection->prepare("DELETE FROM cruise WHERE cruiseID = ?");
+        $stmt->bind_param("i", $cruiseID);
+        $stmt->execute();
+        
+        return $stmt->affected_rows; 
+    }
+    public function getCruisesPaginated($offset, $limit) {
+        $cruises = [];
+        $sql = "SELECT * FROM cruise LIMIT ?, ?";
+        $statement = $this->connection->prepare($sql);
+        $statement->bind_param("ii", $offset, $limit);
+        $statement->execute();
+        $result = $statement->get_result();
+        while ($row = $result->fetch_assoc()) {
+            $cruises[] = $row;
+        }
+        return $cruises;
+    }
+    public function getTotalCruises() {
+        $sql = "SELECT COUNT(*) AS total FROM cruise";
+        $result = $this->connection->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['total'];
+    }
+    public function getDestinationsAdmin() {
+        $destinations = [];
+        $sql = "SELECT * FROM destinations";
+        $result = $this->connection->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $destinations[] = $row;
+            }
+        }
+        return $destinations;
+    }
+    
+    public function getOriginsAdmin() {
+        $origins = [];
+        $sql = "SELECT originID, originName FROM origins";
+        $result = $this->connection->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $origins[] = $row;
+            }
+        }
+        return $origins;
+    }
+    public function addOrigin($originName) {
+        $insertQuery = "INSERT INTO origins (originName) VALUES (?)";
+        $statement = $this->connection->prepare($insertQuery);
+        $statement->bind_param("s", $originName);
+        if ($statement->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function addDestination($locationName) {
+        $insertQuery = "INSERT INTO destinations (locationName) VALUES (?)";
+        $statement = $this->connection->prepare($insertQuery);
+        $statement->bind_param("s", $locationName);
+        if ($statement->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function deleteOrigin($originID) {
+        $deleteQuery = "DELETE FROM origins WHERE originID = ?";
+        $statement = $this->connection->prepare($deleteQuery);
+        $statement->bind_param("i", $originID);
+        $statement->execute();
+        return $statement->affected_rows;
+    }
+    
+    public function deleteDestination($destinationID) {
+        $deleteQuery = "DELETE FROM destinations WHERE destinationID = ?";
+        $statement = $this->connection->prepare($deleteQuery);
+        $statement->bind_param("i", $destinationID);
+        $statement->execute();
+        return $statement->affected_rows;
+    }
+    
+   
+    
+    
+    
 }
 
 // Instantiate Database object

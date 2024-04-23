@@ -29,9 +29,9 @@
         
     </section>
     <section class="footer">
-        <div class="logo-center">
+        <a href="admin-login.php"><div class="logo-center">
             <img src="img/ferrylogo.png" alt="">
-        </div>
+        </div></a>
         <div class="logo-title">
                 <h4>Binangkas</h4>
             </div>
