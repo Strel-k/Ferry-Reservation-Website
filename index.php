@@ -89,7 +89,7 @@
           
         </div>
         <div class="discover">
-            <button class="discover-btn">DISCOVER <i class='bx bx-right-arrow-alt' ></i></button>
+            <a href="booking.php"><button class="discover-btn">DISCOVER <i class='bx bx-right-arrow-alt' ></i></button></a>
         </div>
     </section>
     <section class="reviews">
