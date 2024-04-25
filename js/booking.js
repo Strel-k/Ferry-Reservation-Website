@@ -1,6 +1,6 @@
     document.addEventListener("DOMContentLoaded", function() {
-        let currentPassenger = 1; // Variable to track the current passenger being entered
-        let passengerID; // Define passengerID variable
+        let currentPassenger = 1; 
+        let passengerID;
         let paymentCompleted = false; // Flag to track whether payment is completed
 
         document.getElementById("booking-form").addEventListener("submit", function(event) {
@@ -96,7 +96,6 @@
                 <input type="text" id="username" placeholder="Username">
                 <input type="text" id="cardNumber" placeholder="Card Number">
                 <input type="text" id="expirationDate" placeholder="Expiration Date">
-                <h4>Total: P100.25</h4>
                 <button class="submit-payment-btn">Make Payment</button>
             `;
             document.body.appendChild(popup);
@@ -158,7 +157,7 @@
                     }
                 }
             };
-            xhr.send("email=" + encodeURIComponent(email)); // Pass the email address
+            xhr.send("email=" + encodeURIComponent(email)); 
         }
         
     });
