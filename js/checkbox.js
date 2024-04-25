@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const departingShipSelect = document.getElementById("departing-ship");
     const returningShipSelect = document.getElementById("returning-ship");
 
-    // Initially hide the return date input and its label
     returnDateInput.style.display = "none";
     returnDateLabel.style.display = "none";
 
@@ -18,15 +17,15 @@ document.addEventListener("DOMContentLoaded", function() {
             departureDateInput.style.display = "block";
             returnDateInput.style.display = "block";
             returnDateLabel.style.display = "block";
-            departingShipSelect.style.display = "block"; // Show the departing ship select
-            returningShipSelect.style.display = "block"; // Show the returning ship select
-            populateShipsForDestination(destinationSelect.value); // Populate ships for the selected destination
+            departingShipSelect.style.display = "block";
+            returningShipSelect.style.display = "block"; 
+            populateShipsForDestination(destinationSelect.value); 
         } else {
             departureDateInput.style.display = "block";
             returnDateInput.style.display = "none";
             returnDateLabel.style.display = "none";
-            departingShipSelect.style.display = "none"; // Hide the departing ship select
-            returningShipSelect.style.display = "none"; // Hide the returning ship select
+            departingShipSelect.style.display = "none"; 
+            returningShipSelect.style.display = "none";
         }
     });
 
@@ -36,34 +35,31 @@ document.addEventListener("DOMContentLoaded", function() {
             departureDateInput.style.display = "block";
             returnDateInput.style.display = "none";
             returnDateLabel.style.display = "none";
-            departingShipSelect.style.display = "block"; // Show the departing ship select
-            returningShipSelect.style.display = "none"; // Hide the returning ship select
-            populateShipsForDestination(destinationSelect.value); // Populate ships for the selected destination
+            departingShipSelect.style.display = "block";
+            returningShipSelect.style.display = "none";
+            populateShipsForDestination(destinationSelect.value);
         } else {
             departureDateInput.style.display = "block";
             returnDateInput.style.display = "block";
             returnDateLabel.style.display = "block";
-            departingShipSelect.style.display = "block"; // Show the departing ship select
-            returningShipSelect.style.display = "block"; // Show the returning ship select
-            populateShipsForDestination(destinationSelect.value); // Populate ships for the selected destination
+            departingShipSelect.style.display = "block"; 
+            returningShipSelect.style.display = "block"; 
+            populateShipsForDestination(destinationSelect.value); 
         }
     });
 
-    // Function to populate ships for the selected destination
     function populateShipsForDestination(destinationID) {
         fetch("../script/fetch-ships.php?destinationID=" + destinationID)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Server response was not ok: ' + response.statusText);
                 }
-                return response.json(); // Read the response as JSON
+                return response.json(); 
             })
             .then(data => {
-                console.log("Server Response:", data); // Log the response to check its content
-                // Clear previous options
+                console.log("Server Response:", data); 
                 departingShipSelect.innerHTML = '';
                 returningShipSelect.innerHTML = '';
-                // Populate ship options
                 data.forEach(ship => {
                     const option = document.createElement('option');
                     option.value = ship.cruiseID;
@@ -75,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(error => console.error("Error fetching ships:", error));
     }
 
-    // Event listener for destination select change
     destinationSelect.addEventListener("change", function() {
         populateShipsForDestination(this.value);
     });
