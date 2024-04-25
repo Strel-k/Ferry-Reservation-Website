@@ -1,7 +1,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         let currentPassenger = 1; 
         let passengerID;
-        let paymentCompleted = false; // Flag to track whether payment is completed
+        let paymentCompleted = false;
 
         document.getElementById("booking-form").addEventListener("submit", function(event) {
             event.preventDefault();
@@ -12,7 +12,6 @@
             const cabinType = document.getElementById("cabin").value;
             document.getElementById("input-body").style.display = "none";
 
-            // Get the email value dynamically
             const emailField = document.querySelector('input[name^="email"]');
             const email = emailField ? emailField.value : '';
             
